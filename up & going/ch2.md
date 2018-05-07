@@ -167,7 +167,7 @@ var b = 3.14159;
 a.length;				// 11
 a.toUpperCase();		// "HELLO WORLD"
 b.toFixed(4);			// "3.1416"
-```
+This is important
 
 The "how" behind being able to call `a.toUpperCase()` is more complicated than just that method existing on the value.
 
