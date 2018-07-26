@@ -51,7 +51,7 @@ Arrays are also a form of objects, with extra behavior. The organization of cont
 ### Built-in Objects
 
 There are several other object sub-types, usually referred to as built-in objects. For some of them, their names seem to imply they are directly related to their simple primitives counter-parts, but in fact, their relationship is more complicated, which we'll explore shortly.
-
+**
 * `String`
 * `Number`
 * `Boolean`
@@ -61,7 +61,7 @@ There are several other object sub-types, usually referred to as built-in object
 * `Date`
 * `RegExp`
 * `Error`
-
+**
 These built-ins have the appearance of being actual types, even classes, if you rely on the similarity to other languages such as Java's `String` class.
 
 But in JS, these are actually just built-in functions. Each of these built-in functions can be used as a constructor (that is, a function call with the `new` operator -- see Chapter 2), with the result being a newly *constructed* object of the sub-type in question. For instance:
