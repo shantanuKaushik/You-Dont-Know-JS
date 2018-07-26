@@ -57,7 +57,7 @@ I'm pretty sure most of you readers have heard someone say (even made the claim 
 
 But are we multitaskers? Can we really do two conscious, intentional actions at once and think/reason about both of them at exactly the same moment? Does our highest level of brain functionality have parallel multithreading going on?
 
-The answer may surprise you: **probably not.**
+The answer may surprise you: probably not.
 
 That's just not really how our brains appear to be set up. We're much more single taskers than many of us (especially A-type personalities!) would like to admit. We can really only think about one thing at any given instant.
 
@@ -87,7 +87,7 @@ Even though at an operational level our brains are async evented, we seem to pla
 
 You'll notice that this higher level thinking (planning) doesn't seem very async evented in its formulation. In fact, it's kind of rare for us to deliberately think solely in terms of events. Instead, we plan things out carefully, sequentially (A then B then C), and we assume to an extent a sort of temporal blocking that forces B to wait on A, and C to wait on B.
 
-When a developer writes code, they are planning out a set of actions to occur. If they're any good at being a developer, they're **carefully planning** it out. "I need to set `z` to the value of `x`, and then `x` to the value of `y`," and so forth.
+When a developer writes code, they are planning out a set of actions to occur. If they're any good at being a developer, they're carefully planning it out. "I need to set `z` to the value of `x`, and then `x` to the value of `y`," and so forth.
 
 When we write out synchronous code, statement by statement, it works a lot like our errands to-do list:
 
@@ -114,9 +114,9 @@ The reason it's difficult for us as developers to write async evented code, espe
 
 We think in step-by-step terms, but the tools (callbacks) available to us in code are not expressed in a step-by-step fashion once we move from synchronous to asynchronous.
 
-And **that** is why it's so hard to accurately author and reason about async JS code with callbacks: because it's not how our brain planning works.
+And that is why it's so hard to accurately author and reason about async JS code with callbacks: because it's not how our brain planning works.
 
-**Note:** The only thing worse than not knowing why some code breaks is not knowing why it worked in the first place! It's the classic "house of cards" mentality: "it works, but not sure why, so nobody touch it!" You may have heard, "Hell is other people" (Sartre), and the programmer meme twist, "Hell is other people's code." I believe truly: "Hell is not understanding my own code." And callbacks are one main culprit.
+Note: The only thing worse than not knowing why some code breaks is not knowing why it worked in the first place! It's the classic "house of cards" mentality: "it works, but not sure why, so nobody touch it!" You may have heard, "Hell is other people" (Sartre), and the programmer meme twist, "Hell is other people's code." I believe truly: "Hell is not understanding my own code." And callbacks are one main culprit.
 
 ### Nested/Chained Callbacks
 
@@ -274,7 +274,7 @@ Even though our brains might plan out a series of tasks in a sequential type of 
 
 But the brittle nature of manually hardcoded callbacks (even with hardcoded error handling) is often far less graceful. Once you end up specifying (aka pre-planning) all the various eventualities/paths, the code becomes so convoluted that it's hard to ever maintain or update it.
 
-**That** is what "callback hell" is all about! The nesting/indentation are basically a side show, a red herring.
+That is what "callback hell" is all about! The nesting/indentation are basically a side show, a red herring.
 
 And as if all that's not enough, we haven't even touched what happens when two or more chains of these callback continuations are happening *simultaneously*, or when the third step branches out into "parallel" callbacks with gates or latches, or... OMG, my brain hurts, how about yours!?
 
@@ -349,7 +349,7 @@ analytics.trackPurchase( purchaseData, function(){
 } );
 ```
 
-**Note:** This should look familiar to you from Chapter 1, because we're essentially creating a latch to handle if there happen to be multiple concurrent invocations of our callback.
+Note: This should look familiar to you from Chapter 1, because we're essentially creating a latch to handle if there happen to be multiple concurrent invocations of our callback.
 
 But then one of your QA engineers asks, "what happens if they never call the callback?" Oops. Neither of you had thought about that.
 
@@ -362,7 +362,7 @@ You begin to chase down the rabbit hole, and think of all the possible things th
 * Swallow any errors/exceptions that may happen
 * ...
 
-That should feel like a troubling list, because it is. You're probably slowly starting to realize that you're going to have to invent an awful lot of ad hoc logic **in each and every single callback** that's passed to a utility you're not positive you can trust.
+That should feel like a troubling list, because it is. You're probably slowly starting to realize that you're going to have to invent an awful lot of ad hoc logic in each and every single callback that's passed to a utility you're not positive you can trust.
 
 Now you realize a bit more completely just how hellish "callback hell" is.
 
@@ -421,7 +421,7 @@ addNumbers( 21, "21" );	// 42
 
 However you go about it, these sorts of checks/normalizations are fairly common on function inputs, even with code we theoretically entirely trust. In a crude sort of way, it's like the programming equivalent of the geopolitical principle of "Trust But Verify."
 
-So, doesn't it stand to reason that we should do the same thing about composition of async function callbacks, not just with truly external code but even with code we know is generally "under our own control"? **Of course we should.**
+So, doesn't it stand to reason that we should do the same thing about composition of async function callbacks, not just with truly external code but even with code we know is generally "under our own control"? Of course we should.
 
 But callbacks don't really offer anything to assist us. We have to construct all that machinery ourselves, and it often ends up being a lot of boilerplate/overhead that we repeat for every single async callback.
 
@@ -451,7 +451,7 @@ ajax( "http://some.url.1", success, failure );
 
 In APIs of this design, often the `failure()` error handler is optional, and if not provided it will be assumed you want the errors swallowed. Ugh.
 
-**Note:** This split-callback design is what the ES6 Promise API uses. We'll cover ES6 Promises in much more detail in the next chapter.
+Note: This split-callback design is what the ES6 Promise API uses. We'll cover ES6 Promises in much more detail in the next chapter.
 
 Another common callback pattern is called "error-first style" (sometimes called "Node style," as it's also the convention used across nearly all Node.js APIs), where the first argument of a single callback is reserved for an error object (if any). If success, this argument will be empty/falsy (and any subsequent arguments will be the success data), but if an error result is being signaled, the first argument is set/truthy (and usually nothing else is passed):
 
@@ -516,7 +516,7 @@ Another trust issue is being called "too early." In application-specific terms, 
 
 This nondeterminism around the sync-or-async behavior is almost always going to lead to very difficult to track down bugs. In some circles, the fictional insanity-inducing monster named Zalgo is used to describe the sync/async nightmares. "Don't release Zalgo!" is a common cry, and it leads to very sound advice: always invoke callbacks asynchronously, even if that's "right away" on the next turn of the event loop, so that all callbacks are predictably async.
 
-**Note:** For more information on Zalgo, see Oren Golan's "Don't Release Zalgo!" (https://github.com/oren/oren.github.io/blob/master/posts/zalgo.md) and Isaac Z. Schlueter's "Designing APIs for Asynchrony" (http://blog.izs.me/post/59142742143/designing-apis-for-asynchrony).
+Note: For more information on Zalgo, see Oren Golan's "Don't Release Zalgo!" (https://github.com/oren/oren.github.io/blob/master/posts/zalgo.md) and Isaac Z. Schlueter's "Designing APIs for Asynchrony" (http://blog.izs.me/post/59142742143/designing-apis-for-asynchrony).
 
 Consider:
 
@@ -602,6 +602,6 @@ Second, and more importantly, callbacks suffer from *inversion of control* in th
 
 Inventing ad hoc logic to solve these trust issues is possible, but it's more difficult than it should be, and it produces clunkier and harder to maintain code, as well as code that is likely insufficiently protected from these hazards until you get visibly bitten by the bugs.
 
-We need a generalized solution to **all of the trust issues**, one that can be reused for as many callbacks as we create without all the extra boilerplate overhead.
+We need a generalized solution to all of the trust issues, one that can be reused for as many callbacks as we create without all the extra boilerplate overhead.
 
 We need something better than callbacks. They've served us well to this point, but the *future* of JavaScript demands more sophisticated and capable async patterns. The subsequent chapters in this book will dive into those emerging evolutions.
