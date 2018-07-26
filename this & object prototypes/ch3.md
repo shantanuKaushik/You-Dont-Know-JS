@@ -31,12 +31,12 @@ The constructed form and the literal form result in exactly the same sort of obj
 
 Objects are the general building block upon which much of JS is built. They are one of the 6 primary types (called "language types" in the specification) in JS:
 
-* `string`
+** * `string`
 * `number`
 * `boolean`
 * `null`
 * `undefined`
-* `object`
+* `object` **
 
 Note that the *simple primitives* (`string`, `number`, `boolean`, `null`, and `undefined`) are **not** themselves `objects`. `null` is sometimes referred to as an object type, but this misconception stems from a bug in the language which causes `typeof null` to return the string `"object"` incorrectly (and confusingly). In fact, `null` is its own primitive type.
 
